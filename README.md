@@ -22,35 +22,36 @@ TradeMan lets trusted businesses tokenize a portion of their ownership (less tha
 
 🔥** Key Features**
 
-Feature	Description
-🏪 Local Business Listing	                                                                      Cafés, grocery stores, salons & more list % ownership
-🧾 Tokenized Shares	                                                                            Businesses can offer up to 70% stake as ERC-20 tokens
-💸 Investor Dashboard	                                                                          Track ROI, dividends, and trading opportunities
-🔁 Smart Contract Payouts                                                                      	Dividends are distributed automatically on-chain
-🛡️ Founder Ownership Locked                                                                   	Founders can't lose 100% — capped at 70% ownership
-🌍 Open, Trustless & Scalable                                                                  	All records live on Ethereum testnet (Sepolia)
+Featur Description
+
+    🏪 Local Business Listing	                                                                      Cafés, grocery stores, salons & more list % ownership
+    🧾 Tokenized Shares	                                                                            Businesses can offer up to 70% stake as ERC-20 tokens
+    💸 Investor Dashboard	                                                                          Track ROI, dividends, and trading opportunities
+    🔁 Smart Contract Payouts                                                                      	Dividends are distributed automatically on-chain
+    🛡️ Founder Ownership Locked                                                                   	Founders can't lose 100% — capped at 70% ownership
+    🌍 Open, Trustless & Scalable                                                                  	All records live on Ethereum testnet (Sepolia)
 
 💡 Why "Ground-Level Stock Market"?
 🌱 TradeMan isn’t built for startups.
 🏪 It’s built for businesses with roots — the neighborhood café, the local grocery chain, the family-run salon.
 
 🧱** Tech Stack**
+Layer Stack
 
-Layer	Stack
-🔗 Blockchain	                                                Ethereum (Sepolia Testnet)
-📜 Contracts                                                 	Solidity (ERC-20 token standard)
-🖥 Backend	                                                  Node.js + Express
-🔐 Wallets                                                  	MetaMask + Web3Auth (optional)
-📊 Database                                                 	Firebase (for profiles & analytics)
-🧩 Frontend	                                                  FlutterFlow 
+    🔗 Blockchain	                                                Ethereum (Sepolia Testnet)
+    📜 Contracts                                                 	Solidity (ERC-20 token standard)
+    🖥 Backend	                                                  Node.js + Express
+    🔐 Wallets                                                  	MetaMask + Web3Auth (optional)
+    📊 Database                                                 	Firebase (for profiles & analytics)
+    🧩 Frontend	                                                  FlutterFlow 
 
 ⚙️ **How It Works**
 
-Business creates listing                – defines % of ownership to tokenize (e.g., 60%)
-Smart contract deployed                 – tokens minted and locked with cap rules
-Investors buy tokens                    – tracked on-chain via MetaMask or wallet
-Business grows                          – shares profit via dividend payout
-Investors earn                          – passive income, and trade their shares
+    Business creates listing                – defines % of ownership to tokenize (e.g., 60%)
+    Smart contract deployed                 – tokens minted and locked with cap rules
+    Investors buy tokens                    – tracked on-chain via MetaMask or wallet
+    Business grows                          – shares profit via dividend payout
+    Investors earn                          – passive income, and trade their shares
 
 🚀 **Why TradeMan?**
 
