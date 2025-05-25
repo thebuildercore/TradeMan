@@ -15,6 +15,7 @@ At the same time, traders and investors want real-world ROI and community-driven
 
 TradeMan lets trusted businesses tokenize a portion of their ownership (less than 100% to prevent small business to loss there ownership) and raise funds from local or global investors.
 🪙 These tokens represent:
+           
            📈 Equity-like ownership
            💰 Real profit-sharing (dividends)
            🔒 Transparent smart contracts
