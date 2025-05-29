@@ -3,15 +3,6 @@
 🧠 The Solution: TradeMan
 TradeMan lets trusted businesses tokenize a portion of their ownership (less than 100% to prevent small business to loss there ownership) and raise funds from local or global investors.
 
-🔥 Key Features
-Feature	Description
-🏪 Local Business Listing	                                                                      Cafés, grocery stores, salons & more list % ownership
-🧾 Tokenized Shares	                                                                            Businesses can offer up to 70% stake as ERC-20 tokens
-💸 Investor Dashboard	                                                                          Track ROI, dividends, and trading opportunities
-🔁 Smart Contract Payouts                                                                      	Dividends are distributed automatically on-chain
-🛡️ Founder Ownership Locked                                                                   	Founders can't lose 100% — capped at 70% ownership
-🌍 Open, Trustless & Scalable                                                                  	All records live on Ethereum testnet (Sepolia)
-
 Current Progress...
 Smart contract Written...... 4 contracts                27 May 2025  (codes are confidential now)
 BricksToken ShareToken Marketplace VenderRedemption
@@ -20,4 +11,14 @@ Under Testing.....
 
 🔥Contracts has been added as Binary files
 Screenshot of the original contract has been added to prevent any theft activities as the repo has been set public... Temporarily
+
+
+🔥 Key Features
+Feature	Description
+🏪 Local Business Listing	                                                                      Cafés, grocery stores, salons & more list % ownership
+🧾 Tokenized Shares	                                                                            Businesses can offer up to 70% stake as ERC-20 tokens
+💸 Investor Dashboard	                                                                          Track ROI, dividends, and trading opportunities
+🔁 Smart Contract Payouts                                                                      	Dividends are distributed automatically on-chain
+🛡️ Founder Ownership Locked                                                                   	Founders can't lose 100% — capped at 70% ownership
+🌍 Open, Trustless & Scalable                                                                  	All records live on Ethereum testnet (Sepolia)
 
