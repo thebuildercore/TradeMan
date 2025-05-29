@@ -2,10 +2,6 @@
 
 🧠 The Solution: TradeMan
 TradeMan lets trusted businesses tokenize a portion of their ownership (less than 100% to prevent small business to loss there ownership) and raise funds from local or global investors.
-🪙 These tokens represent:
-           📈 Equity-like ownership
-           💰 Real profit-sharing (dividends)
-           🔒 Transparent smart contracts
 
 🔥 Key Features
 Feature	Description
@@ -16,24 +12,12 @@ Feature	Description
 🛡️ Founder Ownership Locked                                                                   	Founders can't lose 100% — capped at 70% ownership
 🌍 Open, Trustless & Scalable                                                                  	All records live on Ethereum testnet (Sepolia)
 
-Layer	Stack
-🔗 Blockchain	                                                Ethereum (Sepolia Testnet)
-📜 Contracts                                                 	Solidity (ERC-20 token standard)
-🖥 Backend	                                                  Node.js + Express
-🔐 Wallets                                                  	MetaMask + Web3Auth (optional)
-📊 Database                                                 	Firebase (for profiles & analytics)
-🧩 Frontend	                                                  FlutterFlow 
-
-⚙️ How It Works
-Business creates listing                – defines % of ownership to tokenize (e.g., 60%)
-Smart contract deployed                 – tokens minted and locked with cap rules
-Investors buy tokens                    – tracked on-chain via MetaMask or wallet
-Business grows                          – shares profit via dividend payout
-Investors earn                          – passive income, and trade their shares
-
 Current Progress...
 Smart contract Written...... 4 contracts                27 May 2025  (codes are confidential now)
 BricksToken ShareToken Marketplace VenderRedemption
 Smart Contracts Compiled                                 28 May 2025
 Under Testing.....
+
+🔥Contracts has been added as Binary files
+Screenshot of the original contract has been added to prevent any theft activities as the repo has been set public... Temporarily
 
