@@ -1,15 +1,16 @@
 # 💼 TradeMan – The Ground-Level Stock Market
 
-🧠 The Solution: TradeMan
+🧠 The Solution: TradeMan 
 TradeMan lets trusted businesses tokenize a portion of their ownership (less than 100% to prevent small business to loss there ownership) and raise funds from local or global investors.
 
+Project Started: 23 May 2025
 Current Progress...
 Smart contract Written...... 4 contracts                27 May 2025  (codes are confidential now)
 BricksToken ShareToken Marketplace VenderRedemption
 Smart Contracts Compiled                                 28 May 2025
 Under Testing.....
 Frontend Progress - 6-7 Pages are created using flutterflow to speed up the progress
-Backend- for authentication Firebase will be used and for database node.js 
+Backend- for authentication Firebase will be used and for database Node.js + Express
 
 🔥Contracts has been added as Binary files
 Screenshot of the original contract has been added to prevent any theft activities as the repo has been set public... Temporarily
