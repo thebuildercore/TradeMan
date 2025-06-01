@@ -66,18 +66,20 @@ India's tier-2 cities and towns are full of profitable, trusted businesses that 
                     Equity-style ownership
                     Passive income through dividends
 
+## 🛠 Smart Contracts
 
-- `ShareToken.sol`: ERC20 token representing equity shares
-- `BricksToken.sol`: Utility token with custom logic
-- `Marketplace.sol`: Allows buying/selling of share tokens
+- `ShareToken.sol`: ERC-20 token representing platform currency or share value
+- `BricksToken.sol`: ERC-20 token representing business equity with ownership and minting logic
+- `Marketplace.sol`: Manages listing and trading of ShareTokens between users
 
 ## 🌐 Deployed Contracts (Sepolia Testnet)
 
-- **ShareToken**: `0x...`
-- **BricksToken**: `0x...`
-- **Marketplace**: `0x...`
+- **Deployer Wallet**: `0x91942914d635364bF79fd8326dB7D30c3c8E37B8`
+- **ShareToken**: `0xB510b1A90Fc3A34d1B464D69ad94448de7924ab5`
+- **BricksToken**: `0x0C6E2eB7c8761D5103F744E09c832c68cCBd10f9`
+- **Marketplace**: `0xE474A6F728F8eE2D22a686eC52135d21b7AD99Bd`
 
-> You can verify on Sepolia via [Etherscan](https://sepolia.etherscan.io/)
+> You can explore these contracts on [Sepolia Etherscan](https://sepolia.etherscan.io/) using the above addresses.
 
 ## 🔧 How to Run Locally
 
