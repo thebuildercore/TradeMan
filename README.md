@@ -65,3 +65,25 @@ India's tier-2 cities and towns are full of profitable, trusted businesses that 
                     Real-world ROI
                     Equity-style ownership
                     Passive income through dividends
+
+
+- `ShareToken.sol`: ERC20 token representing equity shares
+- `BricksToken.sol`: Utility token with custom logic
+- `Marketplace.sol`: Allows buying/selling of share tokens
+
+## 🌐 Deployed Contracts (Sepolia Testnet)
+
+- **ShareToken**: `0x...`
+- **BricksToken**: `0x...`
+- **Marketplace**: `0x...`
+
+> You can verify on Sepolia via [Etherscan](https://sepolia.etherscan.io/)
+
+## 🔧 How to Run Locally
+
+```bash
+git clone https://github.com/thebuildercore/TradeMan.git
+cd TradeMan
+npm install
+npx hardhat test
+
