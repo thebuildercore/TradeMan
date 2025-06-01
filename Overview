@@ -49,6 +49,15 @@ BricksToken
       at ContractFactory.deploy (node_modules\ethers\src.ts\contract\factory.ts:105:31)
       at Context.<anonymous> (test\VendorRedemption.test.js:14:35)
 
+VendorRedemption Contract skipped...
+ Rest three contracts Deployed..
+E:\Defi App>npx hardhat run scripts/deploy.js --network sepolia
+Deploying contracts with: 0x91942914d635364bF79fd8326dB7D30c3c8E37B8
+ShareToken deployed at: 0xB510b1A90Fc3A34d1B464D69ad94448de7924ab5
+BricksToken deployed at: 0x0C6E2eB7c8761D5103F744E09c832c68cCBd10f9
+Marketplace deployed at: 0xE474A6F728F8eE2D22a686eC52135d21b7AD99Bd
+
+
 🔥 Key Features
 Feature	Description
 🏪 Local Business Listing	                                                                      Cafés, grocery stores, salons & more list % ownership
