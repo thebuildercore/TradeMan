@@ -8,7 +8,7 @@ Current Progress...
 Smart contract Written...... 4 contracts                27 May 2025  (codes are confidential now)
 BricksToken ShareToken Marketplace VenderRedemption
 Smart Contracts Compiled                                 28 May 2025
-Under Testing.....
+Tested
 Frontend Progress - 6-7 Pages are created using flutterflow to speed up the progress
 Backend- for authentication Firebase will be used and for database Node.js + Express
 
@@ -47,7 +47,8 @@ BricksToken
       at Context.<anonymous> (test\VendorRedemption.test.js:14:35)
 
 VendorRedemption Contract skipped...
- Rest three contracts Deployed..
+
+ Rest three BricksToken ShareToken and Marketplace contracts Deployed..
 🔥🔥🔥E:\Defi App>npx hardhat run scripts/deploy.js --network sepolia
         Deploying contracts with: 0x91942914d635364bF79fd8326dB7D30c3c8E37B8
         ShareToken deployed at: 0xB510b1A90Fc3A34d1B464D69ad94448de7924ab5
