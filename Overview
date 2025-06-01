@@ -15,6 +15,39 @@ Backend- for authentication Firebase will be used and for database Node.js + Exp
 🔥Contracts has been added as Binary files
 Screenshot of the original contract has been added to prevent any theft activities as the repo has been set public... Temporarily
 
+Current contract status-
+npx hardhat compile 
+Compiled 11 Solidity files successfully (evm target: paris).
+
+Current test status
+ 
+BricksToken
+    ✔ should mint and transfer Bricks
+    ✔ should not allow minting beyond 70% cap (89ms)
+
+  Marketplace
+    ✔ should list shares for sale and allow investor to buy
+
+  ShareToken
+    ✔ Should set the correct owner
+    ✔ Should set reserve wallet
+    ✔ Should mint tokens
+    ✔ Should burn tokens
+    ✔ Should transfer to reserve wallet
+
+  VendorRedemption
+    1) "before each" hook for "should register and unregister a vendor"
+
+
+  8 passing (2s)
+  1 failing
+
+  1) VendorRedemption
+       "before each" hook for "should register and unregister a vendor":
+     Error: incorrect number of arguments to constructor
+      at ContractFactory.getDeployTransaction (node_modules\ethers\src.ts\contract\factory.ts:87:19)
+      at ContractFactory.deploy (node_modules\ethers\src.ts\contract\factory.ts:105:31)
+      at Context.<anonymous> (test\VendorRedemption.test.js:14:35)
 
 🔥 Key Features
 Feature	Description
