@@ -53,6 +53,13 @@ Layer Stack
     Business grows                          – shares profit via dividend payout
     Investors earn                          – passive income, and trade their shares
 
+**Current Progress**
+
+                       1. Smart contracts tested and deployed
+                          on sepolia testnet you can check the address.
+                       2. Backend server live
+                       3. Routes set
+                       4. Frontend soon
 🚀 **Why TradeMan?**
 
 India's tier-2 cities and towns are full of profitable, trusted businesses that can grow — if they get the right funding.
