@@ -60,6 +60,7 @@ Layer Stack
                        2. Backend server live
                        3. Routes set
                        4. Frontend soon
+Demo video at: https://youtu.be/N1w-FB8RwOc?si=ADjKgz0-QVnWhZl2 (web version)
 🚀 **Why TradeMan?**
 
 India's tier-2 cities and towns are full of profitable, trusted businesses that can grow — if they get the right funding.
