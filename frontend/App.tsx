@@ -18,9 +18,9 @@ function App() {
   }, [checkIfWalletIsConnected]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900 selection:bg-emerald-200 selection:text-emerald-900 font-sans antialiased">
       <Navbar />
-      <main className="flex-grow">
+      <main className="flex-grow pt-14">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/businesses" element={<BusinessListingsPage />} />

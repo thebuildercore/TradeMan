@@ -1,81 +1,117 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Building2, BarChart2, ShieldCheck, DollarSign } from 'lucide-react';
+import { ArrowRight, Building2, BarChart2, ShieldCheck, DollarSign, TrendingUp, Users, Zap } from 'lucide-react';
+import { mockBusinesses } from '../utils/mockData';
 
 const HomePage: React.FC = () => {
+  const featuredBusinesses = mockBusinesses.slice(0, 3);
+
   return (
-    <div>
+    <div className="bg-gray-50 overflow-hidden">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-700 to-primary-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        {/* Background Decorative Elements */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-primary-900 text-white z-0" />
+        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-primary-500/20 blur-3xl z-0" />
+        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-secondary-500/20 blur-3xl z-0" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
-              Invest In Your Local Community
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8">
+              <span className="flex h-2 w-2 rounded-full bg-secondary-400 mr-2 animate-pulse"></span>
+              <span className="text-sm font-medium text-white tracking-wide uppercase">The Future of Local Investment</span>
+            </div>
+            
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-100 to-gray-400">
+              Own a Piece of Your <br className="hidden md:block"/> Community
             </h1>
-            <p className="text-lg md:text-xl max-w-3xl mx-auto opacity-90">
-              The world's first blockchain-based stock market for local businesses. Buy shares, earn dividends, and help your community thrive.
+            
+            <p className="text-xl md:text-2xl text-gray-300 mb-10 leading-relaxed font-light">
+              The world's first blockchain-powered stock market for local businesses. Buy shares, earn dividends, and directly fuel the growth of your neighborhood.
             </p>
-            <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/businesses" className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-white hover:bg-gray-100 md:text-lg">
-                Browse Businesses
-                <ArrowRight className="ml-2 -mr-1 w-5 h-5" />
+            
+            <div className="flex flex-col sm:flex-row justify-center gap-5">
+              <Link to="/businesses" className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-primary-600 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 hover:bg-primary-500 hover:shadow-lg hover:shadow-primary-500/30 hover:-translate-y-1">
+                Explore Opportunities
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to="/create-listing" className="inline-flex items-center justify-center px-6 py-3 border border-white text-base font-medium rounded-md text-white hover:bg-primary-800 md:text-lg">
+              <Link to="/create-listing" className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl hover:bg-white/20 hover:shadow-lg hover:-translate-y-1">
                 List Your Business
+                <Building2 className="ml-2 w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
               </Link>
+            </div>
+            
+            {/* Stats */}
+            <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/10 pt-10">
+              {[
+                { label: 'Total Volume', value: '$2.4M+' },
+                { label: 'Asset Tokenized', value: '45+' },
+                { label: 'Active Investors', value: '12k+' },
+                { label: 'Avg. Yield', value: '8.2%' },
+              ].map((stat, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 + (i * 0.1), duration: 0.5 }}
+                  className="text-center"
+                >
+                  <p className="text-3xl md:text-4xl font-bold text-white mb-1">{stat.value}</p>
+                  <p className="text-sm font-medium text-gray-400 uppercase tracking-wide">{stat.label}</p>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>
         
-        {/* Wave shape divider */}
-        <div className="relative h-16 bg-gradient-to-br from-primary-700 to-primary-900">
-          <svg className="absolute bottom-0 w-full h-16" preserveAspectRatio="none" viewBox="0 0 1440 54">
-            <path fill="#f9fafb" d="M0 22L120 16.7C240 11 480 1 720 1.7C960 2 1200 14 1320 19.3L1440 24V54H1320C1200 54 960 54 720 54C480 54 240 54 120 54H0V22Z"></path>
-          </svg>
-        </div>
+        {/* Decorative Wave */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-gray-50 to-transparent z-10"></div>
       </section>
 
       {/* How It Works Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-24 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">How It Works</h2>
-            <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-              A transparent, blockchain-powered platform connecting local businesses with community investors.
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-primary-600 font-semibold tracking-wide uppercase text-sm mb-3">Seamless Process</h2>
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Democratizing Local Finance</h3>
+            <p className="text-lg text-gray-600">
+              Our blockchain infrastructure removes the middlemen, allowing direct, transparent, and fractional ownership of real-world businesses.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            <div className="hidden lg:block absolute top-12 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-primary-100 via-primary-300 to-primary-100 z-0"></div>
+            
             {[
               {
                 step: '01',
-                title: 'Business Creates Listing',
-                description: 'Local business defines how much ownership to tokenize (maximum 70%) and sets terms.',
-                icon: <Building2 size={32} className="text-primary-600" />,
+                title: 'Tokenization',
+                description: 'Businesses convert equity into secure ERC-20 tokens via our automated smart contracts.',
+                icon: <Zap size={28} className="text-primary-600" />,
               },
               {
                 step: '02',
-                title: 'Tokens Are Generated',
-                description: 'Smart contract deploys and mints ERC-20 tokens representing business shares.',
-                icon: <BarChart2 size={32} className="text-primary-600" />,
+                title: 'Discovery',
+                description: 'Investors browse curated local businesses backed by verifiable real-world assets.',
+                icon: <SearchIcon size={28} className="text-primary-600" />,
               },
               {
                 step: '03',
-                title: 'Investors Purchase Tokens',
-                description: 'Community members buy ownership tokens through the platform.',
-                icon: <DollarSign size={32} className="text-primary-600" />,
+                title: 'Investment',
+                description: 'Purchase fractional shares using USDC with immediate, gas-optimized settlement.',
+                icon: <DollarSign size={28} className="text-primary-600" />,
               },
               {
                 step: '04',
-                title: 'Automatic Dividends',
-                description: 'Smart contracts distribute profits to token holders based on ownership percentage.',
-                icon: <ShieldCheck size={32} className="text-primary-600" />,
+                title: 'Earn & Grow',
+                description: 'Receive automated dividend payouts directly to your wallet as the business succeeds.',
+                icon: <TrendingUp size={28} className="text-primary-600" />,
               },
             ].map((item, index) => (
               <motion.div
@@ -83,196 +119,142 @@ const HomePage: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
+                viewport={{ once: true, margin: "-100px" }}
+                className="relative z-10 flex flex-col items-center bg-white p-8 rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 hover:-translate-y-2 transition-transform duration-300"
               >
-                <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center mb-4">
+                <div className="w-16 h-16 rounded-2xl bg-primary-50 flex items-center justify-center mb-6 rotate-3 shadow-inner">
                   {item.icon}
                 </div>
-                <span className="text-xs font-semibold uppercase text-primary-600 tracking-wide">{item.step}</span>
-                <h3 className="mt-2 text-xl font-semibold text-gray-900">{item.title}</h3>
-                <p className="mt-2 text-gray-600">{item.description}</p>
+                <div className="absolute -top-4 -right-4 w-10 h-10 bg-gray-900 text-white font-bold text-lg rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+                  {item.step}
+                </div>
+                <h4 className="text-xl font-bold text-gray-900 mb-3 text-center">{item.title}</h4>
+                <p className="text-gray-600 text-center text-sm leading-relaxed">{item.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Businesses */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Featured Businesses</h2>
-            <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-              Discover thriving local businesses seeking community investment to grow and expand.
-            </p>
+      {/* Featured Properties */}
+      <section className="py-24 bg-white relative border-y border-gray-100">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gray-50/50 rounded-l-[100px] z-0"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+            <div className="max-w-2xl">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Trending Opportunities</h2>
+              <p className="text-lg text-gray-600">Discover top-performing local businesses currently accepting community investment rounds.</p>
+            </div>
+            <Link to="/businesses" className="hidden md:flex items-center text-primary-600 font-semibold hover:text-primary-700 hover:underline mt-4 md:mt-0">
+              View All Marketplace <ArrowRight className="ml-2 w-4 h-4" />
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Green Earth Café",
-                type: "Food & Beverage",
-                image: "https://images.pexels.com/photos/1855214/pexels-photo-1855214.jpeg",
-                description: "Sustainable, organic café seeking expansion to new locations.",
-                percentAvailable: 40,
-                valuation: "$450,000",
-                dividendYield: "8.5%"
-              },
-              {
-                name: "Bright Smile Dental",
-                type: "Healthcare",
-                image: "https://images.pexels.com/photos/3881445/pexels-photo-3881445.jpeg",
-                description: "Modern dental practice looking to invest in advanced equipment.",
-                percentAvailable: 25,
-                valuation: "$750,000",
-                dividendYield: "7.2%"
-              },
-              {
-                name: "Harbor Bookstore",
-                type: "Retail",
-                image: "https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg",
-                description: "Independent bookstore expanding its community events program.",
-                percentAvailable: 35,
-                valuation: "$320,000",
-                dividendYield: "6.8%"
-              }
-            ].map((business, index) => (
+            {featuredBusinesses.map((business, index) => (
               <motion.div
-                key={index}
+                key={business.id}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all"
+                className="group bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl hover:shadow-primary-500/10 transition-all duration-300 flex flex-col"
               >
-                <div className="h-48 overflow-hidden">
+                <div className="relative h-56 overflow-hidden">
+                  <div className="absolute inset-0 bg-gray-900/20 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
                   <img 
                     src={business.image} 
                     alt={business.name} 
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
                   />
+                  <div className="absolute top-4 left-4 z-20">
+                    <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-xs font-bold uppercase tracking-wider text-gray-900 rounded-full shadow-sm">
+                      {business.type}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-4 right-4 z-20">
+                    <div className="flex items-center px-3 py-1.5 bg-gray-900/80 backdrop-blur-md rounded-full border border-white/20">
+                      <div className="w-2 h-2 rounded-full bg-secondary-400 mr-2 animate-pulse"></div>
+                      <span className="text-xs font-semibold text-white">Funding Active</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="p-5">
-                  <div className="flex justify-between items-center mb-2">
-                    <h3 className="text-xl font-bold text-gray-900">{business.name}</h3>
-                    <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">{business.type}</span>
+                
+                <div className="p-6 flex-grow flex flex-col">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-2xl font-bold text-gray-900 group-hover:text-primary-600 transition-colors">{business.name}</h3>
                   </div>
-                  <p className="text-gray-600 mb-4">{business.description}</p>
-                  <div className="grid grid-cols-3 gap-2 mb-4">
-                    <div className="bg-gray-50 p-2 rounded-md">
-                      <p className="text-xs text-gray-500">Available</p>
-                      <p className="font-semibold text-gray-900">{business.percentAvailable}%</p>
+                  <p className="text-gray-600 text-sm mb-6 line-clamp-2">{business.description}</p>
+                  
+                  <div className="grid grid-cols-2 gap-4 mb-6 mt-auto">
+                    <div className="bg-gray-50 p-3 rounded-xl border border-gray-100">
+                      <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Valuation</p>
+                      <p className="text-lg font-bold text-gray-900">{business.valuation}</p>
                     </div>
-                    <div className="bg-gray-50 p-2 rounded-md">
-                      <p className="text-xs text-gray-500">Valuation</p>
-                      <p className="font-semibold text-gray-900">{business.valuation}</p>
-                    </div>
-                    <div className="bg-gray-50 p-2 rounded-md">
-                      <p className="text-xs text-gray-500">Yield</p>
-                      <p className="font-semibold text-green-600">{business.dividendYield}</p>
+                    <div className="bg-secondary-50 p-3 rounded-xl border border-secondary-100">
+                      <p className="text-xs text-secondary-600 uppercase tracking-wider font-semibold mb-1">Target Yield</p>
+                      <p className="text-lg font-bold text-secondary-700 flex items-center">
+                        {business.dividendYield} <TrendingUp className="ml-1 w-4 h-4" />
+                      </p>
                     </div>
                   </div>
+                  
+                  <div className="space-y-3 mb-6">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-500 font-medium">Funding Progress</span>
+                      <span className="font-bold text-primary-600">{business.fundingProgress}%</span>
+                    </div>
+                    <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${business.fundingProgress}%` }}
+                        transition={{ duration: 1, delay: 0.2 }}
+                        className="h-full bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full"
+                      />
+                    </div>
+                  </div>
+                  
                   <Link
-                    to={`/businesses/${index + 1}`}
-                    className="block w-full py-2 px-4 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-md font-medium transition-colors"
+                    to={`/businesses/${business.id}`}
+                    className="block w-full py-3 px-4 bg-gray-900 hover:bg-primary-600 text-white text-center rounded-xl font-bold transition-colors duration-300 shadow-md"
                   >
-                    View Details
+                    Invest Now
                   </Link>
                 </div>
               </motion.div>
             ))}
           </div>
-
-          <div className="text-center mt-12">
-            <Link to="/businesses" className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700">
-              View All Businesses
+          
+          <div className="mt-10 text-center md:hidden">
+            <Link to="/businesses" className="inline-flex items-center text-primary-600 font-bold hover:underline">
+              View All Marketplace <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                Benefits for Everyone
-              </h2>
-              <p className="mt-4 text-lg text-gray-600">
-                Our platform creates a sustainable economy where everyone wins - businesses get funding without losing control, while investors gain access to real-world assets and passive income.
-              </p>
-              
-              <div className="mt-8 space-y-6">
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white">
-                      <Building2 size={24} />
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">For Businesses</h3>
-                    <p className="mt-1 text-gray-600">
-                      Access flexible funding without loans or giving up control. Build community support and loyal customers.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-secondary-500 text-white">
-                      <DollarSign size={24} />
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">For Investors</h3>
-                    <p className="mt-1 text-gray-600">
-                      Invest in real businesses you know and trust. Earn passive income through dividends and support your community.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-accent-500 text-white">
-                      <ShieldCheck size={24} />
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">For Communities</h3>
-                    <p className="mt-1 text-gray-600">
-                      Strengthen local economies, create jobs, and build more resilient neighborhoods through local investment.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="mt-10 lg:mt-0">
-              <img 
-                src="https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg" 
-                alt="Community investment" 
-                className="rounded-xl shadow-xl"
-              />
-            </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="bg-primary-700">
-        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
-          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-            <span className="block">Ready to get started?</span>
-            <span className="block text-primary-300">Join the local investment revolution today.</span>
+      <section className="relative py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gray-900"></div>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1556761175-5973dc0f3299?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent"></div>
+        
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+          <ShieldCheck className="w-16 h-16 text-secondary-400 mx-auto mb-6" />
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">
+            Ready to Build Wealth Locally?
           </h2>
-          <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0 space-x-4">
-            <Link to="/businesses" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50">
-              Explore Businesses
+          <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto font-light">
+            Join thousands of investors already earning passive income while directly supporting the small businesses that make their communities unique.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <Link to="/businesses" className="w-full sm:w-auto px-8 py-4 bg-secondary-500 hover:bg-secondary-400 text-gray-900 font-bold rounded-xl text-lg transition-transform hover:-translate-y-1 shadow-lg shadow-secondary-500/25">
+              Start Investing
             </Link>
-            <Link to="/create-listing" className="inline-flex items-center justify-center px-5 py-3 border border-white text-base font-medium rounded-md text-white hover:bg-primary-800">
-              List Your Business
+            <span className="text-gray-400 font-medium">or</span>
+            <Link to="/create-listing" className="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold rounded-xl text-lg transition-all backdrop-blur-md hover:-translate-y-1">
+              Tokenize Your Business
             </Link>
           </div>
         </div>
@@ -280,5 +262,26 @@ const HomePage: React.FC = () => {
     </div>
   );
 };
+
+// SearchIcon component since it wasn't imported from lucide
+function SearchIcon(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="11" cy="11" r="8" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+    </svg>
+  );
+}
 
 export default HomePage;

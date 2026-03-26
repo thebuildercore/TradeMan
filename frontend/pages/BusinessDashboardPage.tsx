@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
- import { BarChart, Users, DollarSign, Calendar, TrendingUp, Download, Plus } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { BarChart, Users, DollarSign, Calendar, TrendingUp, Download, Plus, Building, Share2, Award, Zap, ChevronRight } from 'lucide-react';
 import { useWallet } from '../context/WalletContext';
 import toast from 'react-hot-toast';
 
@@ -11,7 +11,6 @@ const BusinessDashboardPage: React.FC = () => {
   const [dividendAmount, setDividendAmount] = useState<string>('');
   const [dividendNote, setDividendNote] = useState<string>('');
 
-  // Mock data for a business owner's dashboard
   const businessData = {
     name: "Green Earth Café",
     tokenized: 40,
@@ -20,15 +19,8 @@ const BusinessDashboardPage: React.FC = () => {
     tokensIssued: 18000,
     tokenPrice: 10,
     tokensSold: 12500,
-    revenue: {
-      current: 280000,
-      previous: 230000,
-      percentChange: 21.7
-    },
-    dividendsPaid: {
-      total: 24000,
-      lastQuarter: 6500
-    },
+    revenue: { current: 280000, previous: 230000, percentChange: 21.7 },
+    dividendsPaid: { total: 24000, lastQuarter: 6500 },
     ownerTokens: 5500,
     image: "https://images.pexels.com/photos/1855214/pexels-photo-1855214.jpeg",
   };
@@ -39,18 +31,12 @@ const BusinessDashboardPage: React.FC = () => {
     { address: "0x9876...1234", tokens: 1500, ownership: "3.33%", since: "2025-02-10" },
     { address: "0x4567...8901", tokens: 1200, ownership: "2.67%", since: "2025-03-05" },
     { address: "0x2345...6789", tokens: 1000, ownership: "2.22%", since: "2025-03-20" },
-    { address: "0x3456...7890", tokens: 800, ownership: "1.78%", since: "2025-04-15" },
-    { address: "0x5678...9012", tokens: 700, ownership: "1.56%", since: "2025-05-01" },
-    { address: "0x6789...0123", tokens: 500, ownership: "1.11%", since: "2025-05-10" },
-    { address: "0x7890...1234", tokens: 500, ownership: "1.11%", since: "2025-05-20" },
-    { address: "0x8901...2345", tokens: 400, ownership: "0.89%", since: "2025-06-01" },
   ];
 
   const mockDividendHistory = [
     { date: "2025-06-15", amount: 6500, quarter: "Q2 2025", investorCount: 32, status: "Distributed" },
     { date: "2025-03-15", amount: 6000, quarter: "Q1 2025", investorCount: 28, status: "Distributed" },
     { date: "2024-12-15", amount: 5500, quarter: "Q4 2024", investorCount: 25, status: "Distributed" },
-    { date: "2024-09-15", amount: 4500, quarter: "Q3 2024", investorCount: 22, status: "Distributed" },
   ];
 
   const handleDistributeDividends = () => {
@@ -58,8 +44,6 @@ const BusinessDashboardPage: React.FC = () => {
       toast.error('Please enter a valid amount');
       return;
     }
-
-    // In a real app, this would call a smart contract function
     toast.success(`Successfully distributed $${dividendAmount} to ${businessData.investors} investors`);
     setShowDividendModal(false);
     setDividendAmount('');
@@ -68,25 +52,26 @@ const BusinessDashboardPage: React.FC = () => {
 
   if (!currentAccount) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl z-0" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-secondary-500/10 rounded-full blur-3xl z-0" />
+        
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3 }}
-          className="max-w-md w-full bg-white p-8 rounded-lg shadow-md text-center"
+          initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.5 }}
+          className="max-w-md w-full bg-white/80 backdrop-blur-xl p-10 rounded-3xl shadow-2xl border border-white relative z-10 text-center"
         >
-          <div className="w-16 h-16 rounded-full bg-primary-100 flex items-center justify-center mx-auto mb-4">
-            {/* <Building size={28} className="text-primary-600" /> */}
+          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary-50 to-primary-100 border border-primary-200 shadow-inner flex items-center justify-center mx-auto mb-6 rotate-3">
+            <Building size={36} className="text-primary-600 drop-shadow-sm" />
           </div>
-          <h2 className="text-2xl font-bold mb-2">Connect Your Wallet</h2>
-          <p className="text-gray-600 mb-6">
-            Please connect your wallet to access your business dashboard and manage your listing.
+          <h2 className="text-3xl font-extrabold text-gray-900 mb-3 tracking-tight">Business Portal</h2>
+          <p className="text-gray-500 mb-8 leading-relaxed">
+            Connect your Web3 wallet to manage your tokenized business, distribute dividends, and engage with your investors.
           </p>
           <button
             onClick={connectWallet}
-            className="w-full py-3 px-4 bg-primary-600 hover:bg-primary-700 text-white rounded-md font-medium transition-colors"
+            className="w-full py-4 px-4 bg-gray-900 hover:bg-primary-600 text-white rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-primary-600/30 transform hover:-translate-y-1"
           >
-            Connect Wallet
+            Connect Wallet Setup
           </button>
         </motion.div>
       </div>
@@ -94,449 +79,131 @@ const BusinessDashboardPage: React.FC = () => {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
-          <div className="flex items-center">
-            <div className="h-16 w-16 rounded-lg overflow-hidden flex-shrink-0">
-              <img src={businessData.image} alt={businessData.name} className="h-full w-full object-cover" />
-            </div>
-            <div className="ml-4">
-              <h1 className="text-3xl font-bold text-gray-900">{businessData.name}</h1>
-              <p className="text-gray-600">Business Dashboard</p>
-            </div>
-          </div>
-          <div className="mt-4 md:mt-0 flex space-x-3">
-            <button 
-              onClick={() => setShowDividendModal(true)}
-              className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-            >
-              <DollarSign size={16} className="mr-2" />
-              Distribute Dividends
-            </button>
-            <button className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-              <Download size={16} className="mr-2" />
-              Generate Report
-            </button>
+    <div className="bg-gray-50 min-h-screen pb-20">
+      {/* Premium Header */}
+      <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-primary-900 pt-16 pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1556761175-5973dc0f32d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center opacity-5 mix-blend-overlay"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl mix-blend-screen" />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-6">
+              <div className="h-24 w-24 rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 shrink-0">
+                <img src={businessData.image} alt={businessData.name} className="h-full w-full object-cover" />
+              </div>
+              <div>
+                <span className="bg-white/10 text-primary-200 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block backdrop-blur-md border border-white/10">Verified Business</span>
+                <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-2 tracking-tight">{businessData.name}</h1>
+                <p className="text-primary-200 text-lg flex items-center">
+                  <Building size={18} className="mr-2 opacity-70" /> 
+                  <span className="font-mono bg-black/20 px-2 py-0.5 rounded text-sm">{currentAccount.slice(0,6)}...{currentAccount.slice(-4)}</span>
+                </p>
+              </div>
+            </motion.div>
+            
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1 }} className="flex items-center gap-3">
+              <button onClick={() => setShowDividendModal(true)} className="px-5 py-2.5 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-bold text-sm transition-all shadow-lg shadow-primary-500/30 flex items-center">
+                <DollarSign size={16} className="mr-2" /> Pay Dividends
+              </button>
+              <button className="px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20 rounded-lg font-bold text-sm transition-all flex items-center shadow-lg">
+                <Share2 size={16} className="mr-2 opacity-70" /> Share
+              </button>
+            </motion.div>
           </div>
         </div>
+      </div>
 
-        {/* Overview Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
-        >
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center">
-              <div className="p-3 rounded-md bg-primary-100 text-primary-600">
-                <DollarSign size={24} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-20">
+        
+        {/* KPI Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {[
+            { label: "Business Valuation", value: businessData.valuation, bg: "bg-blue-500", icon: <DollarSign size={24} className="text-white" /> },
+            { label: "Community Investors", value: businessData.investors.toString(), bg: "bg-purple-500", icon: <Users size={24} className="text-white" /> },
+            { label: "Tokens Issued", value: `${businessData.tokensSold} / ${businessData.tokensIssued}`, bg: "bg-primary-500", icon: <Award size={24} className="text-white" /> },
+            { label: "Total Dividends", value: `$${businessData.dividendsPaid.total}`, bg: "bg-emerald-500", icon: <Zap size={24} className="text-white" /> }
+          ].map((stat, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.1 }} className="bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl shadow-gray-200/50 border border-white p-6 flex flex-col justify-between hover:-translate-y-1 transition-transform duration-300">
+              <div className="flex justify-between items-start mb-4">
+                <div className={`w-12 h-12 rounded-xl text-white flex items-center justify-center shadow-lg ${stat.bg}`}>
+                  {stat.icon}
+                </div>
               </div>
-              <div className="ml-5">
-                <p className="text-sm font-medium text-gray-500">Business Valuation</p>
-                <p className="text-2xl font-semibold text-gray-900">{businessData.valuation}</p>
+              <div>
+                <h3 className="text-gray-500 text-sm font-bold uppercase tracking-wider mb-1">{stat.label}</h3>
+                <span className="text-2xl font-extrabold text-gray-900">{stat.value}</span>
               </div>
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center">
-              <div className="p-3 rounded-md bg-secondary-100 text-secondary-600">
-                <Users size={24} />
-              </div>
-              <div className="ml-5">
-                <p className="text-sm font-medium text-gray-500">Total Investors</p>
-                <p className="text-2xl font-semibold text-gray-900">{businessData.investors}</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center">
-              <div className="p-3 rounded-md bg-accent-100 text-accent-600">
-                <BarChart size={24} />
-              </div>
-              <div className="ml-5">
-                <p className="text-sm font-medium text-gray-500">Tokens Sold</p>
-                <p className="text-2xl font-semibold text-gray-900">{businessData.tokensSold} / {businessData.tokensIssued}</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center">
-              <div className="p-3 rounded-md bg-green-100 text-green-600">
-                <DollarSign size={24} />
-              </div>
-              <div className="ml-5">
-                <p className="text-sm font-medium text-gray-500">Total Dividends Paid</p>
-                <p className="text-2xl font-semibold text-gray-900">${businessData.dividendsPaid.total}</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+            </motion.div>
+          ))}
+        </div>
 
-        {/* Tab Navigation */}
-        <div className="mb-6 border-b border-gray-200">
-          <nav className="-mb-px flex space-x-8">
+        {/* Tab Navigation Glassmorphism */}
+        <div className="bg-white/80 backdrop-blur-lg rounded-xl p-2 mb-8 inline-flex space-x-2 border border-white shadow-sm overflow-x-auto max-w-full">
+          {[
+            { id: 'overview', label: 'Overview', icon: <BarChart size={16} /> },
+            { id: 'investors', label: 'Investors', icon: <Users size={16} /> },
+            { id: 'dividends', label: 'Dividends', icon: <DollarSign size={16} /> }
+          ].map((tab) => (
             <button
-              onClick={() => setActiveTab('overview')}
-              className={`pb-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === 'overview'
-                  ? 'border-primary-500 text-primary-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id as any)}
+              className={`flex items-center px-4 py-2.5 rounded-lg font-bold text-sm transition-all whitespace-nowrap ${
+                activeTab === tab.id
+                  ? 'bg-gray-900 text-white shadow-md'
+                  : 'text-gray-500 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
-              <div className="flex items-center">
-                <BarChart size={18} className="mr-2" />
-                Overview
-              </div>
+              <span className={`mr-2 ${activeTab === tab.id ? 'opacity-100' : 'opacity-70'}`}>{tab.icon}</span>
+              {tab.label}
             </button>
-            
-            <button
-              onClick={() => setActiveTab('investors')}
-              className={`pb-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === 'investors'
-                  ? 'border-primary-500 text-primary-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
-            >
-              <div className="flex items-center">
-                <Users size={18} className="mr-2" />
-                Investors
-              </div>
-            </button>
-            
-            <button
-              onClick={() => setActiveTab('dividends')}
-              className={`pb-4 px-1 border-b-2 font-medium text-sm ${
-                activeTab === 'dividends'
-                  ? 'border-primary-500 text-primary-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
-            >
-              <div className="flex items-center">
-                <DollarSign size={18} className="mr-2" />
-                Dividends
-              </div>
-            </button>
-          </nav>
+          ))}
         </div>
 
         {/* Tab Content */}
-        {activeTab === 'overview' && (
+        <AnimatePresence mode="wait">
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+            key={activeTab}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="w-full"
           >
-            {/* Business Performance */}
-            <div className="lg:col-span-2">
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="px-6 py-5 border-b border-gray-200">
-                  <h3 className="text-lg font-medium text-gray-900">Business Performance</h3>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-6">
-                    <div>
-                      <p className="text-sm text-gray-500">Current Year Revenue</p>
-                      <p className="text-2xl font-bold text-gray-900">${businessData.revenue.current.toLocaleString()}</p>
-                      <div className="flex items-center mt-1 text-sm text-green-600">
-                        <TrendingUp size={14} className="mr-1" />
-                        <span>{businessData.revenue.percentChange}% vs previous year</span>
-                      </div>
+            {activeTab === 'overview' && (
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Main Panel */}
+                <div className="lg:col-span-2">
+                  <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden">
+                    <div className="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                      <h3 className="text-lg font-bold text-gray-900 flex items-center"><TrendingUp size={18} className="mr-2 text-primary-500" /> Revenue Growth</h3>
+                      <button className="text-xs font-bold text-gray-600 bg-white border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-colors shadow-sm">
+                        View Detailed Report
+                      </button>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <button className="text-sm text-gray-700 px-3 py-1 border border-gray-300 rounded hover:bg-gray-50">Monthly</button>
-                      <button className="text-sm text-white px-3 py-1 bg-primary-600 rounded hover:bg-primary-700">Yearly</button>
-                    </div>
-                  </div>
-                  
-                  <div className="h-64 bg-gray-100 rounded-md p-4 flex items-end justify-between">
-                    {/* Simplified chart representation */}
-                    {[35, 45, 38, 55, 60, 58, 65, 70, 68, 75, 80, 85].map((height, i) => (
-                      <div key={i} className="w-1/12">
-                        <div 
-                          className={`rounded-t-sm ${i === 11 ? 'bg-primary-600' : 'bg-primary-400'}`}
-                          style={{ height: `${height}%` }}
-                        ></div>
-                        <p className="text-xs text-center mt-1">{i + 1}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Ownership Breakdown */}
-            <div>
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="px-6 py-5 border-b border-gray-200">
-                  <h3 className="text-lg font-medium text-gray-900">Ownership Breakdown</h3>
-                </div>
-                <div className="p-6">
-                  <div className="h-52 bg-gray-100 rounded-md mb-4 flex items-center justify-center">
-                    {/* Simplified pie chart representation */}
-                    <div className="relative w-40 h-40">
-                      <div className="absolute inset-0 rounded-full border-8 border-primary-500"></div>
-                      <div 
-                        className="absolute bg-gray-100 rounded-full" 
-                        style={{ 
-                          top: '8px', 
-                          left: '8px', 
-                          right: '8px', 
-                          bottom: '8px', 
-                          clipPath: 'polygon(50% 50%, 100% 50%, 100% 0%, 0% 0%, 0% 50%)' 
-                        }}
-                      ></div>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-lg font-bold text-gray-900">60%</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <div className="w-3 h-3 bg-primary-500 rounded-full"></div>
-                        <span className="text-sm text-gray-700 ml-2">You (Owner)</span>
-                      </div>
-                      <span className="text-sm font-medium">60%</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
-                        <span className="text-sm text-gray-700 ml-2">Community Investors</span>
-                      </div>
-                      <span className="text-sm font-medium">40%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-white rounded-lg shadow-md overflow-hidden mt-6">
-                <div className="px-6 py-5 border-b border-gray-200">
-                  <h3 className="text-lg font-medium text-gray-900">Token Information</h3>
-                </div>
-                <div className="p-6">
-                  <div className="space-y-4">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Total Tokens</span>
-                      <span className="font-medium">{businessData.tokensIssued}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Tokens Sold</span>
-                      <span className="font-medium">{businessData.tokensSold}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Your Tokens</span>
-                      <span className="font-medium">{businessData.ownerTokens}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Token Price</span>
-                      <span className="font-medium">${businessData.tokenPrice}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Contract Address</span>
-                      <a href="#" className="text-primary-600 hover:text-primary-800 truncate max-w-[160px]">0xabc...def</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-
-        {activeTab === 'investors' && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            className="bg-white rounded-lg shadow-md overflow-hidden"
-          >
-            <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-              <h3 className="text-lg font-medium text-gray-900">Investor List ({mockInvestors.length})</h3>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  {/* <Search size={16} className="text-gray-400" /> */}
-                  const Search = () (
-                 <input
-                  type="text"
-                  placeholder="Search..."
-                   className="border p-2 rounded w-full"
-                    />
-                    );
-
-export default Search;
-
-                </div>
-                <input
-                  type="text"
-                  placeholder="Search investors..."
-                  className="border border-gray-300 rounded-md pl-10 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
-                />
-              </div>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Wallet Address</th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tokens</th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ownership %</th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Investor Since</th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {mockInvestors.map((investor, index) => (
-                    <tr key={index} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900">{investor.address}</div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{investor.tokens}</div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{investor.ownership}</div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-500">
-                          {new Date(investor.since).toLocaleDateString()}
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-8">
+                        <div>
+                          <p className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-1">YTD Revenue</p>
+                          <p className="text-4xl font-extrabold text-gray-900">${businessData.revenue.current.toLocaleString()}</p>
+                          <div className="flex items-center mt-2 text-sm font-bold text-emerald-600 bg-emerald-50 inline-flex px-2 py-1 rounded-md">
+                            <TrendingUp size={14} className="mr-1" />
+                            +{businessData.revenue.percentChange}% vs last year
+                          </div>
                         </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm">
-                        <button className="text-primary-600 hover:text-primary-800 mr-3">
-                          Message
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800">
-                          View
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <div className="bg-gray-50 px-6 py-4 flex justify-between items-center">
-              <div>
-                <p className="text-gray-500 text-sm">
-                  Showing <span className="font-medium">1</span> to <span className="font-medium">10</span> of <span className="font-medium">{mockInvestors.length}</span> investors
-                </p>
-              </div>
-              <div className="flex space-x-2">
-                <button className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                  Previous
-                </button>
-                <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700">
-                  Next
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-
-        {activeTab === 'dividends' && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2">
-                <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                  <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-                    <h3 className="text-lg font-medium text-gray-900">Dividend History</h3>
-                    <button
-                      onClick={() => setShowDividendModal(true)}
-                      className="inline-flex items-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700"
-                    >
-                      <Plus size={16} className="mr-1" />
-                      Distribute New
-                    </button>
-                  </div>
-                  <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-gray-200">
-                      <thead className="bg-gray-50">
-                        <tr>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quarter</th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Investors</th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody className="bg-white divide-y divide-gray-200">
-                        {mockDividendHistory.map((dividend, index) => (
-                          <tr key={index} className="hover:bg-gray-50">
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm text-gray-900">
-                                {new Date(dividend.date).toLocaleDateString()}
-                              </div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm font-medium text-gray-900">{dividend.quarter}</div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm font-medium text-gray-900">${dividend.amount}</div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm text-gray-900">{dividend.investorCount}</div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <span className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                {dividend.status}
-                              </span>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm">
-                              <button className="text-primary-600 hover:text-primary-800">
-                                View Details
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              
-              <div>
-                <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                  <div className="px-6 py-4 border-b border-gray-200">
-                    <h3 className="text-lg font-medium text-gray-900">Dividend Stats</h3>
-                  </div>
-                  <div className="p-6 space-y-6">
-                    <div>
-                      <h4 className="text-sm font-medium text-gray-500 mb-2">Total Dividends Paid</h4>
-                      <p className="text-2xl font-bold text-gray-900">${businessData.dividendsPaid.total}</p>
-                    </div>
-                    
-                    <div>
-                      <h4 className="text-sm font-medium text-gray-500 mb-2">Last Quarter Dividends</h4>
-                      <p className="text-2xl font-bold text-gray-900">${businessData.dividendsPaid.lastQuarter}</p>
-                    </div>
-                    
-                    <div>
-                      <h4 className="text-sm font-medium text-gray-500 mb-2">Average Dividend per Token</h4>
-                      <p className="text-2xl font-bold text-gray-900">$0.52</p>
-                    </div>
-                    
-                    <div className="pt-4 border-t border-gray-200">
-                      <h4 className="text-sm font-medium text-gray-900 mb-3">Dividend Distribution Timeline</h4>
-                      <div className="space-y-3">
-                        {['Q1', 'Q2', 'Q3', 'Q4'].map((quarter, idx) => (
-                          <div key={idx} className="flex items-center">
-                            <div className={`h-6 w-6 rounded-full flex items-center justify-center ${idx < 2 ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-400'}`}>
-                              <Calendar size={14} />
+                      </div>
+                      
+                      <div className="h-64 bg-gray-50/50 rounded-xl p-4 flex items-end justify-between border border-gray-100">
+                        {/* Mock Chart */}
+                        {[35, 45, 38, 55, 60, 58, 65, 70, 68, 75, 80, 85].map((height, i) => (
+                          <div key={i} className="w-1/12 px-1 group cursor-pointer relative">
+                            <div className="opacity-0 group-hover:opacity-100 absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs font-bold py-1 px-2 rounded-md transition-opacity pointer-events-none whitespace-nowrap z-10">
+                              +${Math.floor(height * 1.5)}k
                             </div>
-                            <span className="ml-2 text-sm text-gray-600">{quarter} {new Date().getFullYear()}</span>
-                            {idx < 2 && <span className="ml-auto text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-800">Complete</span>}
-                            {idx === 2 && <span className="ml-auto text-xs px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-800">Upcoming</span>}
-                            {idx > 2 && <span className="ml-auto text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-800">Planned</span>}
+                            <div 
+                              className={`rounded-t-md transition-all duration-300 w-full group-hover:bg-primary-500 ${i === 11 ? 'bg-primary-600' : 'bg-primary-200'}`}
+                              style={{ height: `${height}%` }}
+                            />
+                            <p className="text-xs font-bold text-gray-400 text-center mt-2">{['J','F','M','A','M','J','J','A','S','O','N','D'][i]}</p>
                           </div>
                         ))}
                       </div>
@@ -544,102 +211,285 @@ export default Search;
                   </div>
                 </div>
                 
-                <div className="bg-white rounded-lg shadow-md overflow-hidden mt-6">
-                  <div className="p-6">
-                    <h3 className="text-lg font-medium text-gray-900 mb-4">Need Help?</h3>
-                    <p className="text-gray-600 mb-4">
-                      Learn more about managing your business tokens, distributing dividends, and engaging with investors.
-                    </p>
-                    <a href="#" className="text-primary-600 hover:text-primary-800 font-medium inline-flex items-center">
-                      View Documentation
-                      {/* <ChevronRight size={16} className="ml-1" /> */}
-                    </a>
+                {/* Side Panel */}
+                <div className="space-y-8">
+                  <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden">
+                    <div className="px-6 py-5 border-b border-gray-100 bg-gray-50/50">
+                      <h3 className="text-lg font-bold text-gray-900 flex items-center"><Award size={18} className="mr-2 text-secondary-500" /> Ownership Equity</h3>
+                    </div>
+                    <div className="p-6">
+                      <div className="relative w-48 h-48 mx-auto mb-6 transform hover:scale-105 transition-transform duration-500">
+                        <svg viewBox="0 0 36 36" className="w-full h-full drop-shadow-md">
+                          <path
+                            className="text-gray-100"
+                            strokeWidth="3"
+                            stroke="currentColor"
+                            fill="none"
+                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                          />
+                          <path
+                            className="text-primary-500"
+                            strokeWidth="3"
+                            strokeDasharray="60, 100"
+                            strokeLinecap="round"
+                            stroke="currentColor"
+                            fill="none"
+                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                          />
+                        </svg>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center">
+                          <span className="text-3xl font-extrabold text-gray-900">60%</span>
+                          <span className="text-xs font-bold text-gray-500 uppercase">You Retained</span>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between p-3 bg-primary-50 rounded-xl border border-primary-100">
+                          <div className="flex items-center">
+                            <div className="w-3 h-3 bg-primary-500 rounded-full shadow-sm"></div>
+                            <span className="text-sm font-bold text-primary-900 ml-3">You (Owner)</span>
+                          </div>
+                          <span className="text-sm font-extrabold text-primary-700">60%</span>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-100">
+                          <div className="flex items-center">
+                            <div className="w-3 h-3 bg-gray-300 rounded-full shadow-sm"></div>
+                            <span className="text-sm font-bold text-gray-700 ml-3">Retail Investors</span>
+                          </div>
+                          <span className="text-sm font-extrabold text-gray-900">40%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden">
+                    <div className="px-6 py-5 border-b border-gray-100 bg-gray-50/50">
+                      <h3 className="text-lg font-bold text-gray-900 flex items-center"><Zap size={18} className="mr-2 text-yellow-500" /> Token Parameters</h3>
+                    </div>
+                    <div className="p-6 divide-y divide-gray-100">
+                      <div className="py-3 flex justify-between items-center">
+                        <span className="text-sm font-bold text-gray-500">Max Supply</span>
+                        <span className="font-extrabold text-gray-900">{businessData.tokensIssued.toLocaleString()}</span>
+                      </div>
+                      <div className="py-3 flex justify-between items-center">
+                        <span className="text-sm font-bold text-gray-500">Circulating</span>
+                        <span className="font-extrabold text-primary-600">{businessData.tokensSold.toLocaleString()}</span>
+                      </div>
+                      <div className="py-3 flex justify-between items-center">
+                        <span className="text-sm font-bold text-gray-500">Spot Price</span>
+                        <span className="font-extrabold text-emerald-600">${businessData.tokenPrice.toFixed(2)}</span>
+                      </div>
+                      <div className="py-3 flex justify-between items-center">
+                        <span className="text-sm font-bold text-gray-500">Smart Contract</span>
+                        <a href="#" className="text-xs font-mono bg-gray-100 px-2 py-1 rounded text-primary-600 hover:text-primary-800 transition-colors">0xab...def</a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        )}
-      </div>
+            )}
 
-      {/* Distribute Dividend Modal */}
-      {showDividendModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg max-w-md w-full p-6 mx-4">
-            <h3 className="text-xl font-semibold mb-4">Distribute Quarterly Dividend</h3>
-            <p className="text-gray-600 mb-6">
-              This will distribute the specified amount proportionally to all {businessData.investors} token holders based on their ownership percentage.
-            </p>
-            
-            <div className="mb-4">
-              <label htmlFor="dividendAmount" className="block text-sm font-medium text-gray-700 mb-1">
-                Dividend Amount (USD)
-              </label>
-              <div className="relative rounded-md shadow-sm">
-                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                  <span className="text-gray-500 sm:text-sm">$</span>
+            {activeTab === 'investors' && (
+              <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden">
+                <div className="px-6 py-5 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4 bg-gray-50/50">
+                  <h3 className="text-lg font-bold text-gray-900 flex items-center"><Users size={18} className="mr-2 text-primary-500" /> Shareholder Ledger</h3>
+                  <div className="relative w-full sm:w-64">
+                    <input
+                      type="text"
+                      placeholder="Search addresses..."
+                      className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white shadow-sm text-sm"
+                    />
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <svg className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                    </div>
+                  </div>
                 </div>
-                <input
-                  type="number"
-                  name="dividendAmount"
-                  id="dividendAmount"
-                  value={dividendAmount}
-                  onChange={(e) => setDividendAmount(e.target.value)}
-                  className="block w-full rounded-md border-gray-300 pl-7 pr-12 py-2 border focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-                  placeholder="0.00"
-                  min="1"
-                  step="0.01"
-                />
-              </div>
-            </div>
-            
-            <div className="mb-6">
-              <label htmlFor="dividendNote" className="block text-sm font-medium text-gray-700 mb-1">
-                Note to Investors (Optional)
-              </label>
-              <textarea
-                id="dividendNote"
-                value={dividendNote}
-                onChange={(e) => setDividendNote(e.target.value)}
-                rows={3}
-                className="block w-full rounded-md border-gray-300 py-2 px-3 border focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-                placeholder="Add a note about this dividend payment..."
-              />
-            </div>
-            
-            {dividendAmount && (
-              <div className="bg-gray-50 p-4 rounded-md mb-6">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Per Token Amount:</span>
-                  <span className="font-medium">
-                    ${(parseFloat(dividendAmount) / businessData.tokensSold).toFixed(4)}
-                  </span>
-                </div>
-                <div className="flex justify-between text-sm mt-1">
-                  <span className="text-gray-600">Quarter:</span>
-                  <span className="font-medium">Q2 2025</span>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-100 text-sm">
+                    <thead className="bg-white">
+                      <tr>
+                        <th scope="col" className="px-6 py-4 text-left font-bold text-gray-500 uppercase tracking-wider text-xs">Wallet ID</th>
+                        <th scope="col" className="px-6 py-4 text-left font-bold text-gray-500 uppercase tracking-wider text-xs">Holdings</th>
+                        <th scope="col" className="px-6 py-4 text-left font-bold text-gray-500 uppercase tracking-wider text-xs">Equity %</th>
+                        <th scope="col" className="px-6 py-4 text-left font-bold text-gray-500 uppercase tracking-wider text-xs">Joined</th>
+                        <th scope="col" className="px-6 py-4 text-right font-bold text-gray-500 uppercase tracking-wider text-xs">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-50">
+                      {mockInvestors.map((investor, index) => (
+                        <tr key={index} className="hover:bg-gray-50/50 transition-colors">
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span className="font-mono text-gray-600 bg-gray-100 px-2 py-0.5 rounded text-xs select-all">
+                              {investor.address}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="font-extrabold text-gray-900">{investor.tokens.toLocaleString()}</div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-primary-50 text-primary-700">
+                              {investor.ownership}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-gray-500 font-medium">
+                            {new Date(investor.since).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-right text-sm">
+                            <button className="text-primary-600 hover:text-primary-800 font-bold hover:underline">
+                              Message
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             )}
-            
-            <div className="flex justify-end space-x-3">
-              <button
-                onClick={() => setShowDividendModal(false)}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleDistributeDividends}
-                disabled={!dividendAmount || parseFloat(dividendAmount) <= 0}
-                className="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-md font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Distribute Dividend
-              </button>
-            </div>
+
+            {activeTab === 'dividends' && (
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div className="lg:col-span-2">
+                  <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden">
+                    <div className="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                      <h3 className="text-lg font-bold text-gray-900 flex items-center"><DollarSign size={18} className="mr-2 text-emerald-500" /> Payment History</h3>
+                      <button onClick={() => setShowDividendModal(true)} className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-bold rounded-lg text-white bg-primary-600 hover:bg-primary-700 shadow-md">
+                        <Plus size={16} className="mr-1" /> Distribute New
+                      </button>
+                    </div>
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full divide-y divide-gray-100 text-sm">
+                        <thead className="bg-white">
+                          <tr>
+                            <th scope="col" className="px-6 py-4 text-left font-bold text-gray-500 uppercase tracking-wider text-xs">Date</th>
+                            <th scope="col" className="px-6 py-4 text-left font-bold text-gray-500 uppercase tracking-wider text-xs">Period</th>
+                            <th scope="col" className="px-6 py-4 text-left font-bold text-gray-500 uppercase tracking-wider text-xs">Gross Output</th>
+                            <th scope="col" className="px-6 py-4 text-left font-bold text-gray-500 uppercase tracking-wider text-xs">Recipients</th>
+                            <th scope="col" className="px-6 py-4 text-left font-bold text-gray-500 uppercase tracking-wider text-xs">Network Status</th>
+                          </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-50">
+                          {mockDividendHistory.map((dividend, index) => (
+                            <tr key={index} className="hover:bg-gray-50/50 transition-colors group">
+                              <td className="px-6 py-4 whitespace-nowrap text-gray-600 font-medium">
+                                {new Date(dividend.date).toLocaleDateString()}
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <span className="bg-gray-100 px-2 py-0.5 rounded font-bold text-gray-700">{dividend.quarter}</span>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="font-extrabold text-emerald-600">${dividend.amount.toLocaleString()}</div>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="text-sm font-bold text-gray-700">{dividend.investorCount} Wallets</div>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <span className="px-2.5 py-1 inline-flex text-xs font-bold rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 mt-1"></span>
+                                  {dividend.status}
+                                </span>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="space-y-8">
+                  <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden">
+                    <div className="px-6 py-5 border-b border-gray-100 bg-gray-50/50">
+                      <h3 className="text-lg font-bold text-gray-900 flex items-center"><Calendar size={18} className="mr-2 text-primary-500" /> Treasury Stats</h3>
+                    </div>
+                    <div className="p-6 space-y-6">
+                      <div>
+                        <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Lifetime Distributed</h4>
+                        <p className="text-3xl font-extrabold text-gray-900">${businessData.dividendsPaid.total.toLocaleString()}</p>
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Yield Per Token (Avg)</h4>
+                        <p className="text-3xl font-extrabold text-primary-600">$0.52</p>
+                      </div>
+                      
+                      <div className="pt-6 border-t border-gray-100">
+                        <h4 className="text-sm font-bold text-gray-900 mb-4">Payout Schedule</h4>
+                        <div className="space-y-4">
+                          {['Q1', 'Q2', 'Q3', 'Q4'].map((quarter, idx) => (
+                            <div key={idx} className="flex items-center">
+                              <div className={`h-8 w-8 rounded-xl flex items-center justify-center shadow-sm ${idx < 2 ? 'bg-emerald-100 text-emerald-600' : 'bg-gray-100 text-gray-400'}`}>
+                                <Calendar size={14} />
+                              </div>
+                              <span className="ml-3 text-sm font-bold text-gray-700">{quarter} {new Date().getFullYear()}</span>
+                              {idx < 2 && <span className="ml-auto text-xs px-2 py-1 rounded border border-emerald-200 bg-emerald-50 text-emerald-700 font-bold shadow-sm">Settled</span>}
+                              {idx === 2 && <span className="ml-auto text-xs px-2 py-1 rounded border border-yellow-200 bg-yellow-50 text-yellow-700 font-bold shadow-sm">Upcoming</span>}
+                              {idx > 2 && <span className="ml-auto text-xs px-2 py-1 rounded border border-gray-200 bg-gray-50 text-gray-600 font-bold">Planned</span>}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Modern Modal */}
+      <AnimatePresence>
+        {showDividendModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" onClick={() => setShowDividendModal(false)} />
+            <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: -20 }} className="bg-white rounded-3xl max-w-lg w-full p-8 shadow-2xl relative z-10">
+              <div className="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-6">
+                <DollarSign size={32} />
+              </div>
+              <h3 className="text-2xl font-extrabold text-gray-900 mb-2">Automate Yield Payout</h3>
+              <p className="text-gray-500 font-medium mb-8">
+                Distribute stablecoins securely to all {businessData.investors} token holders via smart contract.
+              </p>
+              
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Total Yield (USDC)</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <span className="text-gray-400 font-bold">$</span>
+                    </div>
+                    <input
+                      type="number"
+                      value={dividendAmount}
+                      onChange={(e) => setDividendAmount(e.target.value)}
+                      className="block w-full rounded-xl border-gray-200 pl-8 pr-4 py-3 bg-gray-50 focus:bg-white border-2 focus:ring-0 focus:border-primary-500 font-bold text-gray-900 transition-colors"
+                      placeholder="0.00"
+                    />
+                  </div>
+                </div>
+                
+                {dividendAmount && parseFloat(dividendAmount) > 0 && (
+                  <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-emerald-700 font-medium">Estimated Per Token:</span>
+                      <span className="font-extrabold text-emerald-800">${(parseFloat(dividendAmount) / businessData.tokensSold).toFixed(4)} USDC</span>
+                    </div>
+                  </motion.div>
+                )}
+
+                <div className="flex justify-end space-x-3 pt-4">
+                  <button onClick={() => setShowDividendModal(false)} className="px-5 py-3 rounded-xl font-bold text-gray-600 hover:bg-gray-100 transition-colors">
+                    Cancel
+                  </button>
+                  <button onClick={handleDistributeDividends} className="px-5 py-3 bg-gray-900 hover:bg-primary-600 text-white rounded-xl font-bold shadow-lg shadow-gray-900/20 transform hover:-translate-y-0.5 transition-all">
+                    Sign Transaction
+                  </button>
+                </div>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   );
 };
