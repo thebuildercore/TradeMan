@@ -1,0 +1,3 @@
+node_modules/\n.env\ncoverage/\ntypechain-types/
+node_modules/
+contracts/node_modules/
