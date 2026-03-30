@@ -10,6 +10,7 @@ import BusinessDashboardPage from "./pages/BusinessDashboardPage";
 import CreateListingPage from "./pages/CreateListingPage";
 import { useWallet } from "./context/WalletContext";
 
+
 function App() {
   const { checkIfWalletIsConnected } = useWallet();
 
@@ -18,7 +19,7 @@ function App() {
   }, [checkIfWalletIsConnected]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900 selection:bg-emerald-200 selection:text-emerald-900 font-sans antialiased">
+    <div className="min-h-screen flex flex-col  selection:bg-emerald-200 selection:text-emerald-900 font-sans antialiased">
       <Navbar />
       <main className="flex-grow pt-14">
         <Routes>

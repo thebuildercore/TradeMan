@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
                 </svg>
               </div>
               <span className="ml-3 text-xl font-semibold text-white">
-                LocalStock
+                Trademan
               </span>
             </div>
             <p className="mt-4 text-sm text-gray-300">
